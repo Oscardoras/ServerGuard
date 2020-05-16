@@ -1,0 +1,102 @@
+name: ServerGuard
+version: 1.0.0
+api-version: 1.13
+description: "A plugin to manages permissions and protection rules."
+author: oscardoras
+main: org.bukkitplugin.serverguard.ServerGuardPlugin
+permissions:
+  serverguard:
+    default: op
+    children:
+      serverguard.action: true
+      serverguard.command: true
+  serverguard.action:
+    default: true
+    children:
+      serverguard.action.armorstandmanipulate: true
+      serverguard.action.bedenter: true
+      serverguard.action.blockplace: true
+      serverguard.action.break: true
+      serverguard.action.chat: true
+      serverguard.action.craft: true
+      serverguard.action.damage: true
+      serverguard.action.dropitem: true
+      serverguard.action.editbook: true
+      serverguard.action.fish: true
+      serverguard.action.ignite: true
+      serverguard.action.interact: true
+      serverguard.action.interactentity: true
+      serverguard.action.itemconsume: true
+      serverguard.action.itemheld: true
+      serverguard.action.move: true
+      serverguard.action.openinventory: true
+      serverguard.action.pickupitem: true
+      serverguard.action.portal: true
+      serverguard.action.shearentity: true
+      serverguard.action.signchange: true
+      serverguard.action.toggleflight: true
+      serverguard.action.togglesneak: true
+      serverguard.action.togglesprint: true
+  serverguard.action.armorstandmanipulate:
+    default: true
+  serverguard.action.bedenter:
+    default: true
+  serverguard.action.blockplace:
+    default: true
+  serverguard.action.break:
+    default: true
+  serverguard.action.chat:
+    default: true
+  serverguard.action.craft:
+    default: true
+  serverguard.action.damage:
+    default: true
+  serverguard.action.dropitem:
+    default: true
+  serverguard.action.editbook:
+    default: true
+  serverguard.action.fish:
+    default: true
+  serverguard.action.ignite:
+    default: true
+  serverguard.action.interact:
+    default: true
+  serverguard.action.interactentity:
+    default: true
+  serverguard.action.itemconsume:
+    default: true
+  serverguard.action.itemheld:
+    default: true
+  serverguard.action.move:
+    default: true
+  serverguard.action.openinventory:
+    default: true
+  serverguard.action.pickupitem:
+    default: true
+  serverguard.action.portal:
+    default: true
+  serverguard.action.shearentity:
+    default: true
+  serverguard.action.signchange:
+    default: true
+  serverguard.action.toggleflight:
+    default: true
+  serverguard.action.togglesneak:
+    default: true
+  serverguard.action.togglesprint:
+    default: true
+  serverguard.command:
+    default: op
+    children:
+      serverguard.command.area: true
+      serverguard.command.group: true
+      serverguard.command.permission: true
+      serverguard.command.protectionrule: true
+  serverguard.command.area:
+    default: op
+  serverguard.command.group:
+    default: op
+  serverguard.command.permission:
+    default: op
+  serverguard.command.protectionrule:
+    default: op
