@@ -10,11 +10,10 @@ import org.bukkit.World;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkitplugin.serverguard.CalculateArea;
 import org.bukkitplugin.serverguard.ServerGuardPlugin;
-import org.bukkitutils.area.CalculateArea;
-import org.bukkitutils.area.Localizable;
 
-public class Area implements Localizable {
+public class Area {
 	
 	protected final static Configuration config = ServerGuardPlugin.plugin.getConfig();
 	
@@ -44,7 +43,6 @@ public class Area implements Localizable {
 		} else throw new IllegalStateException("Unregistered area");
 	}
 	
-	@Override
 	public World getWorld() {
 		if (config.contains("area." + name)) {
 			try {
@@ -55,7 +53,6 @@ public class Area implements Localizable {
 		} else throw new IllegalStateException("Unregistered area");
 	}
 	
-	@Override
 	public Location getPositive() {
 		if (config.contains("area." + name)) {
 			ConfigurationSection section = config.getConfigurationSection("area." + name + ".positive");
@@ -67,7 +64,6 @@ public class Area implements Localizable {
 		} else throw new IllegalStateException("Unregistered area");
 	}
 	
-	@Override
 	public Location getNegative() {
 		if (config.contains("area." + name)) {
 			ConfigurationSection section = config.getConfigurationSection("area." + name + ".negative");
@@ -79,7 +75,6 @@ public class Area implements Localizable {
 		} else throw new IllegalStateException("Unregistered area");
 	}
 	
-	@Override
 	public void setLocations(Location positive, Location negative) {
 		if (config.contains("area." + name)) {
 			World oldWorld = getWorld();
@@ -179,6 +174,20 @@ public class Area implements Localizable {
 	}
 	
 	public static List<Area> getLocationAreas(Location location) {
-		return Localizable.getLocationLocalizables(location, getAreas());
+		List<Area> areas = new ArrayList<Area>();
+		World world = location.getWorld();
+		int x = location.getBlockX();
+		int y = location.getBlockY();
+		int z = location.getBlockZ();
+		for (Area area : getAreas()) {
+			Location positive = area.getPositive();
+			Location negative = area.getNegative();
+			if (world.equals(positive.getWorld()))
+				if (x <= positive.getBlockX() && x >= negative.getBlockX())
+					if (y <= positive.getBlockY() && y >= negative.getBlockY())
+						if (z <= positive.getBlockZ() && z >= negative.getBlockZ())
+							areas.add(area);
+		}
+		return areas;
 	}
 }
