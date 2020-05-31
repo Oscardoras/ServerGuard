@@ -57,7 +57,6 @@ public final class ServerGuardPlugin extends BukkitPlugin {
 		PermissionCommand.area();
 		PermissionCommand.group();
 		PermissionCommand.player();
-		PermissionCommand.offlinePlayer();
 		ProtectionRuleCommand.server();
 		ProtectionRuleCommand.world();
 		ProtectionRuleCommand.area();

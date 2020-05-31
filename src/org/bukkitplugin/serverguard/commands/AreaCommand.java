@@ -9,14 +9,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkitplugin.serverguard.Message;
 import org.bukkitplugin.serverguard.targets.Area;
-import org.bukkitutils.command.v1_14_3_V1.Argument;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister.CommandExecutorType;
-import org.bukkitutils.command.v1_14_3_V1.LiteralArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.GreedyStringArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.LocationArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.LocationArgument.LocationType;
-import org.bukkitutils.command.v1_14_3_V1.arguments.StringArgument;
+import org.bukkitutils.command.v1_15_V1.Argument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister;
+import org.bukkitutils.command.v1_15_V1.LiteralArgument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister.CommandExecutorType;
+import org.bukkitutils.command.v1_15_V1.arguments.GreedyStringArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.LocationArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.StringArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.LocationArgument.LocationType;
 
 public final class AreaCommand {
 	private AreaCommand() {}

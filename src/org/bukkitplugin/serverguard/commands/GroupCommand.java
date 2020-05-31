@@ -5,21 +5,20 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkitplugin.serverguard.Message;
 import org.bukkitplugin.serverguard.targets.Group;
 import org.bukkitplugin.serverguard.targets.PermissiblePlayer;
-import org.bukkitutils.command.v1_14_3_V1.Argument;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister.CommandExecutorType;
-import org.bukkitutils.command.v1_14_3_V1.LiteralArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.EntitySelectorArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.EntitySelectorArgument.EntitySelector;
-import org.bukkitutils.command.v1_14_3_V1.arguments.GreedyStringArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.OfflinePlayerArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.StringArgument;
+import org.bukkitutils.command.v1_15_V1.Argument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister;
+import org.bukkitutils.command.v1_15_V1.LiteralArgument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister.CommandExecutorType;
+import org.bukkitutils.command.v1_15_V1.arguments.GreedyStringArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.ScoreboardEntryArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.StringArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.ScoreboardEntryArgument.EntrySelector;
 
 public final class GroupCommand {
 	private GroupCommand() {}
@@ -74,65 +73,37 @@ public final class GroupCommand {
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public static void join() {
 		LinkedHashMap<String, Argument<?>> arguments = new LinkedHashMap<>();
 		arguments.put("join", new LiteralArgument("join"));
-		arguments.put("player", new LiteralArgument("player"));
-		arguments.put("targets", new EntitySelectorArgument(EntitySelector.MANY_PLAYERS));
+		arguments.put("targets", new ScoreboardEntryArgument(EntrySelector.MANY_PLAYERS));
 		arguments.put("group", new GroupArgument());
 		CommandRegister.register("group", arguments, new Permission("serverguard.command.group"), CommandExecutorType.ALL, (cmd) -> {
 			Group group = (Group) cmd.getArg(1);
-			Collection<Player> targets = (Collection<Player>) cmd.getArg(0);
-			for (Player player : targets) {
-				new PermissiblePlayer(player).addGroup(group);
-				cmd.broadcastMessage(new Message("command.group.join", player.getName(), group.getName()));
+			Collection<String> targets = (Collection<String>) cmd.getArg(0);
+			for (String player : targets) {
+				new PermissiblePlayer(Bukkit.getOfflinePlayer(player)).addGroup(group);
+				cmd.broadcastMessage(new Message("command.group.join", player, group.getName()));
 			}
 			return targets.size();
-		});
-		
-		arguments = new LinkedHashMap<>();
-		arguments.put("join", new LiteralArgument("join"));
-		arguments.put("offlinePlayer", new LiteralArgument("offlinePlayer"));
-		arguments.put("targets", new OfflinePlayerArgument());
-		arguments.put("group", new GroupArgument());
-		CommandRegister.register("group", arguments, new Permission("serverguard.command.group"), CommandExecutorType.ALL, (cmd) -> {
-			Group group = (Group) cmd.getArg(1);
-			OfflinePlayer offlinePlayer = (OfflinePlayer) cmd.getArg(0);
-			new PermissiblePlayer(offlinePlayer).addGroup(group);
-			cmd.broadcastMessage(new Message("command.group.join", offlinePlayer.getName(), group.getName()));
-			return 1;
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public static void leave() {
 		LinkedHashMap<String, Argument<?>> arguments = new LinkedHashMap<>();
 		arguments.put("leave", new LiteralArgument("leave"));
-		arguments.put("player", new LiteralArgument("player"));
-		arguments.put("targets", new EntitySelectorArgument(EntitySelector.MANY_PLAYERS));
+		arguments.put("targets", new ScoreboardEntryArgument(EntrySelector.MANY_PLAYERS));
 		arguments.put("group", new GroupArgument());
 		CommandRegister.register("group", arguments, new Permission("serverguard.command.group"), CommandExecutorType.ALL, (cmd) -> {
 			Group group = (Group) cmd.getArg(1);
-			Collection<Player> targets = (Collection<Player>) cmd.getArg(0);
-			for (Player player : targets) {
-				new PermissiblePlayer(player).removeGroup(group);
-				cmd.broadcastMessage(new Message("command.group.leave", player.getName(), group.getName()));
+			Collection<String> targets = (Collection<String>) cmd.getArg(0);
+			for (String player : targets) {
+				new PermissiblePlayer(Bukkit.getOfflinePlayer(player)).removeGroup(group);
+				cmd.broadcastMessage(new Message("command.group.leave", player, group.getName()));
 			}
 			return targets.size();
-		});
-		
-		arguments = new LinkedHashMap<>();
-		arguments.put("leave", new LiteralArgument("leave"));
-		arguments.put("offlinePlayer", new LiteralArgument("offlinePlayer"));
-		arguments.put("targets", new OfflinePlayerArgument());
-		arguments.put("group", new GroupArgument());
-		CommandRegister.register("group", arguments, new Permission("serverguard.command.group"), CommandExecutorType.ALL, (cmd) -> {
-			Group group = (Group) cmd.getArg(1);
-			OfflinePlayer offlinePlayer = (OfflinePlayer) cmd.getArg(0);
-			new PermissiblePlayer(offlinePlayer).removeGroup(group);
-			cmd.broadcastMessage(new Message("command.group.leave", offlinePlayer.getName(), group.getName()));
-			return 1;
 		});
 	}
 	

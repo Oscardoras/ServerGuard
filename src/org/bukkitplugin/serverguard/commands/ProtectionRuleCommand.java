@@ -11,12 +11,12 @@ import org.bukkitplugin.serverguard.Message;
 import org.bukkitplugin.serverguard.ProtectionRule;
 import org.bukkitplugin.serverguard.ProtectionRule.ProtectionRuleNotDefinedException;
 import org.bukkitplugin.serverguard.targets.Area;
-import org.bukkitutils.command.v1_14_3_V1.Argument;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister;
-import org.bukkitutils.command.v1_14_3_V1.CommandRegister.CommandExecutorType;
-import org.bukkitutils.command.v1_14_3_V1.LiteralArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.BooleanArgument;
-import org.bukkitutils.command.v1_14_3_V1.arguments.WorldArgument;
+import org.bukkitutils.command.v1_15_V1.Argument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister;
+import org.bukkitutils.command.v1_15_V1.LiteralArgument;
+import org.bukkitutils.command.v1_15_V1.CommandRegister.CommandExecutorType;
+import org.bukkitutils.command.v1_15_V1.arguments.BooleanArgument;
+import org.bukkitutils.command.v1_15_V1.arguments.WorldArgument;
 
 public final class ProtectionRuleCommand {
 	private ProtectionRuleCommand() {}

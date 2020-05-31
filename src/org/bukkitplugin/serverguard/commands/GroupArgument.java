@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bukkitplugin.serverguard.Message;
 import org.bukkitplugin.serverguard.targets.Group;
-import org.bukkitutils.command.v1_14_3_V1.CustomArgument;
+import org.bukkitutils.command.v1_15_V1.CustomArgument;
 
 public class GroupArgument extends CustomArgument<Group> {
 
@@ -20,7 +20,7 @@ public class GroupArgument extends CustomArgument<Group> {
 	@Override
 	public Group parse(String arg, SuggestedCommand cmd) throws Exception {
 		Group group = Group.getGroup(arg);
-		if (group == null) throw new CustomArgumentException(new Message("group.does_not_exist").getMessage(cmd.getLanguage(), arg));
+		if (group == null) throw getCustomException(new Message("group.does_not_exist").getMessage(cmd.getLanguage(), arg));
 		else return group;
 	}
 }
