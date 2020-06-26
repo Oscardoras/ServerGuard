@@ -3,7 +3,7 @@ version: 1.0.0
 api-version: 1.13
 description: "A plugin to manages permissions and protection rules."
 author: oscardoras
-main: org.bukkitplugin.serverguard.ServerGuardPlugin
+main: me.oscardoras.serverguard.ServerGuardPlugin
 permissions:
   serverguard:
     default: op
